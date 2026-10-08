@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="320" height="240">
+  <defs>
+    <linearGradient id="g-fav" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#36c1e8"/>
+      <stop offset="0.45" stop-color="#5f8cff"/>
+      <stop offset="1" stop-color="#7c4df3"/>
+    </linearGradient>
+    <linearGradient id="f-fav" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c4df3"/>
+      <stop offset="1" stop-color="#5f2ed6"/>
+    </linearGradient>
+  </defs>
+  <path d="M 72 205 L 120 56 Q 160 12 200 56 L 248 205" fill="none" stroke="url(#g-fav)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 92 192 Q 160 96 228 192 Z" fill="#ffffff"/>
+  <g transform="translate(150 168)">
+    <path d="M 20 69 V 45 A 6 6 0 0 1 26 39 H 74 V 69 H 20 Z
+            M 20 69 V 45 A 6 6 0 0 1 26 39 H 34 V 33 A 6 6 0 0 1 40 27
+            H 54 A 6 6 0 0 1 60 33 V 39 H 82 V 69 Z" fill="url(#f-fav)"/>
+    <path d="M 20 69 V 45 A 6 6 0 0 1 26 39 H 74 V 69 H 20 Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(164 182)">
+    <path d="M 10 57 V 34 A 6 6 0 0 1 16 28 H 64 V 57 H 10 Z
+            M 10 57 V 34 A 6 6 0 0 1 16 28 H 22 V 22 A 6 6 0 0 1 28 16
+            H 42 A 6 6 0 0 1 48 22 V 28 H 74 V 57 Z" fill="url(#f-fav)"/>
+    <path d="M 10 57 V 34 A 6 6 0 0 1 16 28 H 64 V 57 H 10 Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
