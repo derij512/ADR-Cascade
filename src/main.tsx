@@ -3,12 +3,11 @@ import { RequireAuth } from "@/components/RequireAuth";
 import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { ConvexReactClient } from "convex/react";
 import { ThemeProvider } from "next-themes";
-import React, { StrictMode, useEffect, lazy, Suspense } from "react";
+import React, { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Outlet, Route, Routes, useLocation } from "react-router";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./index.css";
 
-// Lazy load route components for better code splitting
 const Landing = lazy(() => import("./pages/Landing.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
@@ -17,7 +16,6 @@ const AdrEditor = lazy(() => import("./pages/AdrEditor.tsx"));
 const Settings = lazy(() => import("./pages/Settings.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
-// Simple loading fallback for route transitions
 function RouteLoading() {
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -26,7 +24,6 @@ function RouteLoading() {
   );
 }
 
-/** Hard guard so runtime errors never leave the app as a blank page. */
 class RootErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean; message: string; stack: string }
@@ -66,29 +63,6 @@ class RootErrorBoundary extends React.Component<
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 
-function RouteSyncer() {
-  const location = useLocation();
-  useEffect(() => {
-    window.parent.postMessage(
-      { type: "iframe-route-change", path: location.pathname },
-      "*",
-    );
-  }, [location.pathname]);
-
-  useEffect(() => {
-    function handleMessage(event: MessageEvent) {
-      if (event.data?.type === "navigate") {
-        if (event.data.direction === "back") window.history.back();
-        if (event.data.direction === "forward") window.history.forward();
-      }
-    }
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
-
-  return null;
-}
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider
@@ -100,15 +74,12 @@ createRoot(document.getElementById("root")!).render(
       <RootErrorBoundary>
         <ConvexAuthProvider client={convex}>
           <BrowserRouter>
-            <RouteSyncer />
             <Suspense fallback={<RouteLoading />}>
               <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route
                   path="/auth"
-                  element={
-                    <AuthPage redirectAfterAuth="/dashboard" />
-                  }
+                  element={<AuthPage redirectAfterAuth="/dashboard" />}
                 />
                 <Route element={<RequireAuth><Outlet /></RequireAuth>}>
                   <Route path="/dashboard" element={<Dashboard />} />
